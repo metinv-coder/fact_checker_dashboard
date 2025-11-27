@@ -30,3 +30,19 @@ if __name__ == "__main__":
     result = run_fact_checker(html_id, html, predictions)
     print(result)
 
+import json
+
+INPUT = "data/sample_results.jsonl"
+OUTPUT = "data/finetune_dataset.jsonl"
+
+with open(INPUT) as f_in, open(OUTPUT, "w") as f_out:
+    for line in f_in:
+        entry = json.loads(line)
+        if entry["evidence_found"] and entry["confidence"] >= 85:
+            # Only accept high-confidence corrections
+            f_out.write(json.dumps({
+                "input": entry["html_id"],
+                "label": entry["correct_label"]
+            }) + "\n")
+
+print("Finetuning dataset written to", OUTPUT)
