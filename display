@@ -1,1 +1,32 @@
+import json
+from openai import OpenAI
+import pathlib
+
+client = OpenAI()
+
+def run_fact_checker(html_id, html_text, predictions):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role":"system","content": open("agents/fact_checker_dev_message.md").read()},
+            {"role":"user","content": json.dumps({
+                "html_id": html_id,
+                "html": html_text,
+                "predictions": predictions
+            })}
+        ]
+    )
+    return response.choices[0].message["content"]
+
+if __name__ == "__main__":
+    html_id = "00761"
+    html = open("data/example.html").read()
+    predictions = {
+        "kategori": "Totalrådgivning (2825)",
+        "projekttype": "Plejecenter (2919)",
+        "entreprisetype": "Hovedentreprise",
+        "geografi": "Region Midtjylland"
+    }
+    result = run_fact_checker(html_id, html, predictions)
+    print(result)
 
