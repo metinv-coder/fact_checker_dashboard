@@ -1,1 +1,3 @@
+{"html_id":"00761","field":"kategori","predicted_label":"Totalrådgivning (2825)","correct_label":"Bygherrerådgivning (2822)","evidence_found":false,"confidence":92,"comment":"Teksten nævner 'bygherrerådgiver' i II.1.4."}
+{"html_id":"00761","field":"projekttype","predicted_label":"Plejecenter (2919)","correct_label":"Plejecenter (2919)","evidence_found":true,"confidence":88,"comment":"Direkte nævnt 'nyt plejecenter med 60 boliger'."}
 
